@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<winginx>
+  <project>
+    <name>larashop</name>
+    <url>http://larashop/</url>
+    <root>home/larashop</root>
+  </project>
+</winginx>
