@@ -17,8 +17,12 @@
                     <input type="text" id="email" name="email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Пароль</label>
                     <input type="password" id="password" name="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Подтверждение пароля</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
                 {{ csrf_field() }}

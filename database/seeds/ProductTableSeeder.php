@@ -15,7 +15,7 @@ class ProductTableSeeder extends Seeder
             'imagePath' => 'http://ecx.images-amazon.com/images/I/51ZU%2BCvkTyL.jpg',
             'title' => 'Harry Potter',
             'description' => 'Super cool - at least as a child.',
-            'category' => '1',
+            'category' => 'colors',
             'price' => 10
         ]);
         $product->save();
@@ -24,7 +24,7 @@ class ProductTableSeeder extends Seeder
             'imagePath' => 'http://www.revelationz.net/images/book/gameofthrones3.jpg',
             'title' => 'A Song of Ice and Fire - A Storm of Swords',
             'description' => 'No one is going to survive!',
-            'category' => '1',
+            'category' => 'colors',
             'price' => 10
         ]);
         $product->save();
@@ -33,7 +33,7 @@ class ProductTableSeeder extends Seeder
             'imagePath' => 'http://d.gr-assets.com/books/1411114164l/33.jpg',
             'title' => 'Lord of the Rings',
             'description' => 'I found the movies to be better ...',
-            'category' => '1',
+            'category' => 'colors',
             'price' => 20
         ]);
         $product->save();
@@ -42,7 +42,7 @@ class ProductTableSeeder extends Seeder
             'imagePath' => 'http://ecx.images-amazon.com/images/I/919-FLL37TL.jpg',
             'title' => 'A Song of Ice and Fire - Game of Thrones',
             'description' => 'No one is going to survive!',
-            'category' => '1',
+            'category' => 'colors',
             'price' => 20
         ]);
         $product->save();
@@ -51,7 +51,7 @@ class ProductTableSeeder extends Seeder
             'imagePath' => 'http://www.georgerrmartin.com/wp-content/uploads/2012/08/feastforcrows.jpg',
             'title' => 'A Song of Ice and Fire - A Feast for Crows',
             'description' => 'Still, no one is going to survive!',
-            'category' => '2',
+            'category' => 'instruments',
             'price' => 20
         ]);
         $product->save();

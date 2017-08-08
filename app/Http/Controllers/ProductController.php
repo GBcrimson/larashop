@@ -21,6 +21,18 @@ class ProductController extends Controller
         return view('shop.index', ['products' => $products]);
     }
 
+    public function getColors()
+    {
+        $products = Product::where('category','colors') -> get();
+        return view('shop.index', ['products' => $products]);
+    }
+
+    public function getColorInstruments()
+    {
+        $products = Product::where('category',2) -> get();
+        return view('shop.index', ['products' => $products]);
+    }
+
     public function getAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
