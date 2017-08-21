@@ -39,7 +39,7 @@
                                     <div class="clearfix">
                                         <div class="pull-left price">${{ $product->price }}</div>
                                         <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"
-                                           class="btn btn-success pull-right" role="button">Add to Cart</a>
+                                           class="btn btn-success pull-right addtocart" role="button">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -50,4 +50,8 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ URL::to('src/js/shopping_cart.js') }}"></script>
 @endsection

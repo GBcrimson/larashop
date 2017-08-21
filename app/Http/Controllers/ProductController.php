@@ -40,7 +40,8 @@ class ProductController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return redirect()->route('product.index');
+        if(!$request->ajax())
+            return redirect()->route('product.index');
     }
 
     public function getReduceByOne($id) {
