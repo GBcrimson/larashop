@@ -45,3 +45,7 @@
         </div>
     @endif
 @endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ URL::to('src/js/checkout.js') }}"></script>
+@endsection

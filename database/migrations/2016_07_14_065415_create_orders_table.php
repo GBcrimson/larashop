@@ -16,10 +16,12 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id');
-            $table->text('cart');
+            $table->text('phone');
             $table->text('address');
-            $table->string('name');
-            $table->string('payment_id');
+            $table->text('name');
+            $table->text('cart');
+            $table->text('amount');
+            $table->text('comment');
         });
     }
 

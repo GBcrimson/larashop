@@ -13,6 +13,10 @@
             @endif
             <form action="{{ route('user.signup') }}" method="post">
                 <div class="form-group">
+                    <label for="username">Имя</label>
+                    <input type="text" id="username" name="username" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="email">E-Mail</label>
                     <input type="text" id="email" name="email" class="form-control">
                 </div>

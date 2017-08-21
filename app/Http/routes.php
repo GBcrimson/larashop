@@ -35,6 +35,10 @@ Route::get('/remove/{id}', [
     'uses' => 'ProductController@getRemoveItem',
     'as' => 'product.remove'
 ]);
+Route::post('/set/{id}', [
+    'uses' => 'ProductController@postSetItem',
+    'as' => 'product.set'
+]);
 
 Route::get('/shopping-cart', [
     'uses' => 'ProductController@getCart',
@@ -88,3 +92,8 @@ Route::group(['prefix' => 'user'], function () {
         ]);
     });
 });
+
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'UserController@confirm'
+]);

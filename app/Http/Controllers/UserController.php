@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
 use Session;
+use Mail;
 
 class UserController extends Controller
 {
@@ -20,25 +21,36 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'email|required|unique:users',
+            'username' => 'required|min:4',
             'password' => 'required|min:4|confirmed',
             'password_confirmation' => 'required|min:4'
         ]);
+        $confirm_code = str_random(30);
+        $confirmation_code = ['confirmation_code' => $confirm_code];
 
         $user = new User([
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'confirmation_code' => $confirm_code
         ]);
         $user->save();
 
-        Auth::login($user);
+        Mail::send('mail.verify', $confirmation_code, function($message) {
+            global $request;
+            $message->to($request->input('email'), "lolkek")
+                ->subject('Verify your email address');
+        });
 
-        if (Session::has('oldUrl')) {
-            $oldUrl = Session::get('oldUrl');
-            Session::forget('oldUrl');
-            return redirect()->to($oldUrl);
-        }
+//        Auth::login($user);
 
-        return redirect()->route('user.profile');
+//        if (Session::has('oldUrl')) {
+//            $oldUrl = Session::get('oldUrl');
+//            Session::forget('oldUrl');
+//            return redirect()->to($oldUrl);
+//        }
+
+        return redirect()->route('user.signin')->with('success', 'Проверьте почту!');
     }
 
     public function getSignin()
@@ -53,7 +65,7 @@ class UserController extends Controller
             'password' => 'required|min:4'
         ]);
 
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'confirmed' => 1])) {
             if (Session::has('oldUrl')) {
                 $oldUrl = Session::get('oldUrl');
                 Session::forget('oldUrl');
@@ -75,6 +87,28 @@ class UserController extends Controller
     
     public function getLogout() {
         Auth::logout();
+        return redirect()->route('user.signin');
+    }
+
+    public function confirm($confirmation_code)
+    {
+        if( !$confirmation_code)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user = User::whereConfirmationCode($confirmation_code)->first();
+
+        if ( !$user)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+
         return redirect()->route('user.signin');
     }
 }
