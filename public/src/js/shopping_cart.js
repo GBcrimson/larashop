@@ -7,7 +7,6 @@ $('.addtocart').click(function (el) {
         type:'get',
         url:this.href,
         success:function(response) {
-            console.log(response);
             $('#cartnum')[0].innerHTML = ++num;
         }
     });

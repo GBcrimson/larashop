@@ -25,16 +25,16 @@ Route::get('/add-to-cart/{id}', [
     'uses' => 'ProductController@getAddToCart',
     'as' => 'product.addToCart'
 ]);
+//
+//Route::get('/reduce/{id}', [
+//    'uses' => 'ProductController@getReduceByOne',
+//    'as' => 'product.reduceByOne'
+//]);
 
-Route::get('/reduce/{id}', [
-    'uses' => 'ProductController@getReduceByOne',
-    'as' => 'product.reduceByOne'
-]);
-
-Route::get('/remove/{id}', [
-    'uses' => 'ProductController@getRemoveItem',
-    'as' => 'product.remove'
-]);
+//Route::get('/remove/{id}', [
+//    'uses' => 'ProductController@getRemoveItem',
+//    'as' => 'product.remove'
+//]);
 Route::post('/set/{id}', [
     'uses' => 'ProductController@postSetItem',
     'as' => 'product.set'

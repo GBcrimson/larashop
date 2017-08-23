@@ -25,26 +25,30 @@ class Cart
             }
         }
         $storedItem['qty']++;
-        $storedItem['price'] = $item->price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->totalQty++;
         $this->totalPrice += $item->price;
     }
 
-    public function reduceByOne($id) {
-        $this->items[$id]['qty']--;
-        $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
-        $this->totalQty--;
-        $this->totalPrice -= $this->items[$id]['item']['price'];
-
-        if ($this->items[$id]['qty'] <= 0) {
-            unset($this->items[$id]);
+    public function redact($id, $num) {
+        $num = intval($num);
+        if ($this->items) {
+            if (array_key_exists($id, $this->items)) {
+                if ($num < 1){
+                    $this->totalQty -= $this->items[$id]['qty'];
+                    $this->totalPrice -= $this->items[$id]['price'];
+                    unset($this->items[$id]);
+                } else {
+                    $this->totalQty -= $this->items[$id]['qty'];
+                    $this->totalPrice -= $this->items[$id]['price'];
+                    $this->items[$id]['qty'] = $num;
+                    $this->totalQty += $num;
+                    $this->totalPrice += $this->items[$id]['price'];
+//                    var_dump();
+                }
+            }
         }
     }
 
-    public function removeItem($id) {
-        $this->totalQty -= $this->items[$id]['qty'];
-        $this->totalPrice -= $this->items[$id]['price'];
-        unset($this->items[$id]);
-    }
+
 }
