@@ -6,24 +6,32 @@
 
 @section('content')
     @if(Session::has('cart'))
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <ul class="list-group">
+        <div class="shopping-cart row">
+            <div class="col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1">
+                <table>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Сумма</th>
+                        <th></th>
+                    </tr>
                     @foreach($products as $product)
-                            <li class="list-group-item">
-                                <span class="badge">{{ $product['qty'] }}</span>
-                                <strong>{{ $product['item']['title'] }}</strong>
-                                <span class="label label-success">{{ $product['price'] }}</span>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary btn-xs dropdown-toogle" data-toggle="dropdown">Action <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        {{--<li><a href="{{ route('product.reduceByOne', ['id' => $product['item']['id']]) }}">Reduce by 1</a></li>--}}
-                                        <li><a href="#" class="addfive">add 5</a></li>
-                                    </ul>
-                                </div>
-                            </li>
+                        <tr data-product="{{ $product['item']['id'] }}" class="action_buttons">
+                            <td class="table__name">{{ $product['item']['title'] }}</td>
+                            <td>
+                                <button type="button" data-action="dec" class="btn btn-xs"> - </button>
+                                <input type="text" value="{{ $product['qty'] }}">
+                                <button type="button" data-action="inc" class="btn btn-xs"> + </button>
+                            </td>
+                            <td>{{ $product['price'] }}</td>
+                            <td>{{ $product['price'] * $product['qty'] }}</td>
+                            <td>
+                                <button type="button" data-action="remove" class="btn btn-xs btn-danger"> х </button>
+                            </td>
+                        </tr>
                     @endforeach
-                </ul>
+                </table>
             </div>
         </div>
         <div class="row">

@@ -10,3 +10,25 @@
     font-weight:bold;
     font-size: 16px;
 }
+
+.shopping-cart table{
+    padding:0 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.shopping-cart td, .shopping-cart th{
+    padding: 10px;
+    text-align: center;
+}
+.shopping-cart th{
+    border-bottom: 1px solid #ccc;
+}
+.shopping-cart td input{
+    text-align: center;
+    width:30px;
+}
+
+.shopping-cart .table__name{
+    text-align: left;
+}
