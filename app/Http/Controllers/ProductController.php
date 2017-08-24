@@ -57,6 +57,8 @@ class ProductController extends Controller
 
         if(!$request->ajax())
             return redirect()->route('product.shoppingCart');
+        else
+            return response()->json($cart);
     }
 
     public function getCart()

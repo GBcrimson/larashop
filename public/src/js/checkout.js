@@ -1,4 +1,4 @@
-
+var timer;
 
 $('.action_buttons [data-action]').click(function(e){
     var btn = $(this);
@@ -18,26 +18,31 @@ $('.action_buttons [data-action]').click(function(e){
 $(".action_buttons input").on('change, input', (function(e){
 
     var inp = $(this);
+    console.log(inp);
     var productId = inp.closest("[data-product]").data("product");
-    sendData(productId, inp.value);
+    sendData(productId, inp.val());
 
 }));
 
 function sendData(productId, num) {
-    var timer;
-    var data = {
-        'num': num
-    };
-    $.ajax({
-        type: "POST",
-        url: 'set/' + productId,
-        data: data,
-        success: function(res){
-            console.log(res);
-        },
-        error: function (err) {
-            console.error(err);
-        }});
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+        var data = {
+            'num': num
+        };
+        console.log(data);
+
+        $.ajax({
+            type: "POST",
+            url: 'set/' + productId,
+            data: data,
+            success: function(res){
+                console.log(res);
+            },
+            error: function (err) {
+                console.error(err);
+            }});    }, 1000);
+
 }
 
 function reRender() {
