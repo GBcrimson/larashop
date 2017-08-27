@@ -32,23 +32,23 @@ class Cart
 
     public function redact($id, $num) {
         $num = intval($num);
-        if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
-                if ($num < 1){
-                    $this->totalQty -= $this->items[$id]['qty'];
-                    $this->totalPrice -= $this->items[$id]['price'];
-                    unset($this->items[$id]);
-                } else {
-                    $this->totalQty -= $this->items[$id]['qty'];
-                    $this->totalPrice -= $this->items[$id]['price'];
-                    $this->items[$id]['qty'] = $num;
-                    $this->totalQty += $num;
-                    $this->totalPrice += $this->items[$id]['price'];
-//                    var_dump();
+        if ($num >=0 ){
+            if ($this->items) {
+                if (array_key_exists($id, $this->items)) {
+                        $this->totalQty -= $this->items[$id]['qty'];
+                        $this->totalPrice -= $this->items[$id]['price'];
+                        $this->items[$id]['qty'] = $num;
+                        $this->totalQty += $num;
+                        $this->totalPrice += $this->items[$id]['price'];
                 }
             }
         }
     }
 
+    public function removeItem($id) {
+        $this->totalQty -= $this->items[$id]['qty'];
+        $this->totalPrice -= $this->items[$id]['price'] * $this->items[$id]['qty'];
+        unset($this->items[$id]);
+    }
 
 }

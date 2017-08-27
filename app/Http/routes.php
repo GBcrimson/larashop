@@ -25,16 +25,16 @@ Route::get('/add-to-cart/{id}', [
     'uses' => 'ProductController@getAddToCart',
     'as' => 'product.addToCart'
 ]);
-//
-//Route::get('/reduce/{id}', [
-//    'uses' => 'ProductController@getReduceByOne',
-//    'as' => 'product.reduceByOne'
-//]);
 
-//Route::get('/remove/{id}', [
-//    'uses' => 'ProductController@getRemoveItem',
-//    'as' => 'product.remove'
-//]);
+Route::get('/reduce/{id}', [
+    'uses' => 'ProductController@getReduceByOne',
+    'as' => 'product.reduceByOne'
+]);
+
+Route::get('/remove/{id}', [
+    'uses' => 'ProductController@getRemoveItem',
+    'as' => 'product.remove'
+]);
 Route::post('/set/{id}', [
     'uses' => 'ProductController@postSetItem',
     'as' => 'product.set'
@@ -92,6 +92,24 @@ Route::group(['prefix' => 'user'], function () {
         ]);
     });
 });
+
+Route::group(['prefix' => 'api'], function () {
+
+    Route::post('/cart/{id}', [
+        'uses' => 'ProductController@postItem',
+        'as' => 'product.add'
+    ]);
+    Route::put('/cart/{id}', [
+        'uses' => 'ProductController@putItem',
+        'as' => 'product.put'
+    ]);
+    Route::delete('/cart/{id}', [
+        'uses' => 'ProductController@deleteItem',
+        'as' => 'product.delete'
+    ]);
+
+});
+
 
 Route::get('register/verify/{confirmationCode}', [
     'as' => 'confirmation_path',

@@ -12,6 +12,12 @@ $('.action_buttons [data-action]').click(function(e){
         case "dec":
             inp.value --;
             break;
+        case "remove":
+            var tr = btn.closest('tr');
+            sendDeleteData(tr.data('product'), function(){
+                tr.remove();
+            });
+            break;
     }
 });
 
@@ -24,7 +30,7 @@ $(".action_buttons input").on('change, input', (function(e){
 
 }));
 
-function sendData(productId, num) {
+function sendPutData(productId, num) {
     clearTimeout(timer);
     timer = setTimeout(function() {
         var data = {
@@ -33,18 +39,36 @@ function sendData(productId, num) {
         console.log(data);
 
         $.ajax({
-            type: "POST",
-            url: 'set/' + productId,
+            type: "PUT",
+            url: 'api/cart/' + productId,
             data: data,
             success: function(res){
                 console.log(res);
+                update(res);
+
             },
             error: function (err) {
                 console.error(err);
             }});    }, 1000);
 
 }
+function sendDeleteData(productId, callback) {
+        console.log(productId);
+        $.ajax({
+            type: "DELETE",
+            url: 'api/cart/' + productId,
+            success: function(res){
+                callback();
+                console.log(res);
+                update(res);
+            },
+            error: function (err) {
+                console.error(err);
+            }});
 
-function reRender() {
+}
 
+function update(data) {
+    $('#cartnum')[0].innerHTML = data.totalQty;
+    $('#totalprice')[0].innerHTML = data.totalPrice;
 }

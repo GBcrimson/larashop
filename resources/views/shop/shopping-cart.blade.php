@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <strong>Total: {{ $totalPrice }}</strong>
+                <strong>Total: <span  id="totalprice">{{ $totalPrice }}</span></strong>
             </div>
         </div>
         <hr>

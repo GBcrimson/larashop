@@ -38,7 +38,7 @@
                                     <p class="description">{{ $product->description }}</p>
                                     <div class="clearfix">
                                         <div class="pull-left price">${{ $product->price }}</div>
-                                        <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"
+                                        <a href="{{ route('product.add', ['id' => $product->id]) }}"
                                            class="btn btn-success pull-right addtocart" role="button">Add to Cart</a>
                                     </div>
                                 </div>
