@@ -61,7 +61,7 @@ class ProductController extends Controller
             return response()->json($cart);
     }
 
-    public function deleteItem($id) {
+    public function deleteItem(Request $request, $id) {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->removeItem($id);
@@ -75,14 +75,19 @@ class ProductController extends Controller
         return response()->json($cart);
     }
 
-    public function getCart()
+    public function getCart(Request $request)
     {
         if (!Session::has('cart')) {
             return view('shop.shopping-cart');
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+
+        if(!$request->ajax())
+            return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        else
+            return response()->json($cart);
+
     }
 
     public function getCheckout()

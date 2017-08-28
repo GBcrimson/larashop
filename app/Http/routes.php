@@ -21,25 +21,6 @@ Route::get('/colors', [
     'as' => 'product.colors'
 ]);
 
-Route::get('/add-to-cart/{id}', [
-    'uses' => 'ProductController@getAddToCart',
-    'as' => 'product.addToCart'
-]);
-
-Route::get('/reduce/{id}', [
-    'uses' => 'ProductController@getReduceByOne',
-    'as' => 'product.reduceByOne'
-]);
-
-Route::get('/remove/{id}', [
-    'uses' => 'ProductController@getRemoveItem',
-    'as' => 'product.remove'
-]);
-Route::post('/set/{id}', [
-    'uses' => 'ProductController@postSetItem',
-    'as' => 'product.set'
-]);
-
 Route::get('/shopping-cart', [
     'uses' => 'ProductController@getCart',
     'as' => 'product.shoppingCart'
@@ -95,6 +76,10 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['prefix' => 'api'], function () {
 
+    Route::get('/cart', [
+        'uses' => 'ProductController@getCart',
+        'as' => 'product.get'
+    ]);
     Route::post('/cart/{id}', [
         'uses' => 'ProductController@postItem',
         'as' => 'product.add'
