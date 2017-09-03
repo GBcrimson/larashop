@@ -6,9 +6,16 @@
     color: #7f7f7f;
 }
 
-.price {
+.caption .price {
+    vertical-align: top;
     font-weight:bold;
     font-size: 16px;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.caption a{
+    vertical-align: top;
 }
 
 .shopping-cart table{
@@ -16,14 +23,15 @@
     border-bottom: 1px solid #ccc;
 }
 
-
 .shopping-cart td, .shopping-cart th{
     padding: 10px;
     text-align: center;
 }
+
 .shopping-cart th{
     border-bottom: 1px solid #ccc;
 }
+
 .shopping-cart td input{
     text-align: center;
     width:30px;
@@ -31,4 +39,13 @@
 
 .shopping-cart .table__name{
     text-align: left;
+}
+
+.caption h3{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.product__element{
+    padding: 0 5px;
 }

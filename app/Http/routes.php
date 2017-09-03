@@ -11,7 +11,17 @@
 |
 */
 
+Route::get('/items', [
+    'uses' => 'ProductController@getIndex',
+    'as' => 'product.index'
+]);
+
 Route::get('/', [
+    'uses' => 'ProductController@getIndex',
+    'as' => 'product.index'
+]);
+
+Route::get('/item/{id}', [
     'uses' => 'ProductController@getIndex',
     'as' => 'product.index'
 ]);
@@ -100,3 +110,27 @@ Route::get('register/verify/{confirmationCode}', [
     'as' => 'confirmation_path',
     'uses' => 'UserController@confirm'
 ]);
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['middleware' => 'admin'], function () {
+        Route::get('/items', [
+            'uses' => 'UserController@getSignup',
+            'as' => 'user.signup'
+        ]);
+
+        Route::post('/item', [
+            'uses' => 'UserController@postSignup',
+            'as' => 'user.signup'
+        ]);
+
+        Route::put('/item/{id}', [
+            'uses' => 'UserController@getSignin',
+            'as' => 'user.signin'
+        ]);
+
+        Route::delete('/item/{id}', [
+            'uses' => 'UserController@postSignin',
+            'as' => 'user.signin'
+        ]);
+    });
+});

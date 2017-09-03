@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <h1>Sign Up</h1>
+            <h1>Регистрация</h1>
             @if(count($errors) > 0)
                 <div class="alert alert-danger">
                     @foreach($errors->all() as $error)
@@ -28,7 +28,7 @@
                     <label for="password_confirmation">Подтверждение пароля</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                 {{ csrf_field() }}
             </form>
         </div>

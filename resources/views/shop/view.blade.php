@@ -27,26 +27,20 @@
             </ul>
         </div>
         <div class="col-md-9">
-            @foreach($products->chunk(4) as $productChunk)
-                <div class="row">
-                    @foreach($productChunk as $product)
-                        <div class="col-sm-6 col-md-3 product__element">
-                            <div class="thumbnail">
-                                <img src="{{ $product->imagePath }}" alt="{{ $product->title }}" class="img-responsive">
-                                <div class="caption">
-                                    <h3>{{ $product->title }}</h3>
-                                    <p class="description">{{ $product->description }}</p>
-                                    <div class="clearfix">
-                                        <pre class="price">{{ $product->price }} ₽</pre>
-                                        <a href="{{ route('product.add', ['id' => $product->id]) }}"
-                                           class="btn btn-primary addtocart" role="button">В корзину</a>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col-sm-6 col-md-3 product__element">
+                <div class="thumbnail">
+                    <img src="{{ $product->imagePath }}" alt="{{ $product->title }}" class="img-responsive">
+                    <div class="caption">
+                        <h3>{{ $product->title }}</h3>
+                        <p class="description">{{ $product->description }}</p>
+                        <div class="clearfix">
+                            <pre class="price">{{ $product->price }} ₽</pre>
+                            <a href="{{ route('product.add', ['id' => $product->id]) }}"
+                               class="btn btn-primary addtocart" role="button">В корзину</a>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 
