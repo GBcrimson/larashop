@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function getView(Request $request, $id)
     {
         $product = Product::find($id);
-        return view('shop.index', ['products' => $products]);
+        return view('shop.view', ['product' => $product]);
     }
 
     public function postItem(Request $request, $id)

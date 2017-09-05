@@ -22,8 +22,8 @@ Route::get('/', [
 ]);
 
 Route::get('/item/{id}', [
-    'uses' => 'ProductController@getIndex',
-    'as' => 'product.index'
+    'uses' => 'ProductController@getView',
+    'as' => 'product.view'
 ]);
 
 Route::get('/colors', [
@@ -114,23 +114,23 @@ Route::get('register/verify/{confirmationCode}', [
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/items', [
-            'uses' => 'UserController@getSignup',
-            'as' => 'user.signup'
+            'uses' => 'ItemController@getItem',
+            'as' => 'item.list'
         ]);
 
         Route::post('/item', [
-            'uses' => 'UserController@postSignup',
-            'as' => 'user.signup'
+            'uses' => 'ItemController@postItem',
+            'as' => 'item.add'
         ]);
 
         Route::put('/item/{id}', [
-            'uses' => 'UserController@getSignin',
-            'as' => 'user.signin'
+            'uses' => 'ItemController@putItem',
+            'as' => 'item.redact'
         ]);
 
         Route::delete('/item/{id}', [
-            'uses' => 'UserController@postSignin',
-            'as' => 'user.signin'
+            'uses' => 'ItemController@deleteItem',
+            'as' => 'item.delete'
         ]);
     });
 });

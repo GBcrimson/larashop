@@ -13,9 +13,9 @@ use Auth;
 
 class ItemController extends Controller
 {
-    public function getIndex()
+    public function getItem(Request $request, $id)
     {
-        $products = Product::all();
+        $product = Product::find($id);
         return view('shop.index', ['products' => $products]);
     }
 
@@ -60,23 +60,5 @@ class ItemController extends Controller
         }
 
         return response()->json($cart);
-    }
-
-    public function getCart(Request $request)
-    {
-        if (!Session::has('cart')) {
-            $emptycart = (object)['items'=>[]];
-            if(!$request->ajax())
-                return view('shop.shopping-cart');
-            else
-                return response()->json($emptycart);
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-
-        if(!$request->ajax())
-            return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
-        else
-            return response()->json($cart);
     }
 }
