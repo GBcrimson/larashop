@@ -113,9 +113,14 @@ Route::get('register/verify/{confirmationCode}', [
 
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin'], function () {
-        Route::get('/items', [
+        Route::get('/item/{id}', [
             'uses' => 'ItemController@getItem',
-            'as' => 'item.list'
+            'as' => 'item.get'
+        ]);
+
+        Route::get('/item', [
+            'uses' => 'ItemController@getNewItem',
+            'as' => 'item.getnew'
         ]);
 
         Route::post('/item', [

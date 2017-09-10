@@ -32,7 +32,7 @@
                     @foreach($productChunk as $product)
                         <div class="col-sm-6 col-md-3 product__element">
                             <div class="thumbnail">
-                                <img src="{{ $product->imagePath }}" alt="{{ $product->title }}" class="img-responsive">
+                                    <img src="{{ $product->imagePath }}" alt="{{ $product->title }}" class="img-responsive">
                                 <div class="caption">
                                     <h3>{{ $product->title }}</h3>
                                     <p class="description">{{ $product->description }}</p>

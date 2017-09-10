@@ -36,9 +36,9 @@ class UserController extends Controller
         ]);
         $user->save();
 
-        Mail::send('mail.verify', $confirmation_code, function($message) {
-            global $request;
-            $message->to($request->input('email'), "lolkek")
+        Mail::send('mail.verify', $confirmation_code, function($message) use ($request) {
+
+            $message->to($request->input('email'), "verification")
                 ->subject('Verify your email address');
         });
 

@@ -17,11 +17,11 @@ class RedirectIfAdmin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            var_dump(Auth::guard($guard)->user());
-            return redirect()->route('product.index');
+        if (Auth::user() &&  Auth::user()->admin == 1) {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect('/');
+
     }
 }

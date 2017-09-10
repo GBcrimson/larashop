@@ -1,52 +1,49 @@
 @extends('layouts.master')
 
 @section('title')
-    Laravel Shopping Cart
+    Admin
 @endsection
 
 @section('content')
-    @if(Session::has('success'))
-        <div class="row">
-            <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-                <div id="charge-message" class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
-            </div>
-        </div>
-    @endif
+
     <div class="row">
-        <div class="col-md-3">
-            <ul class="nav nav-list">
-                <li class="nav-header">Краска</li>
-                <li class="active"><a href="#">Отечественные</a></li>
-                <li><a href="#">Иномарки</a></li>
-                <li class="divider"></li>
-                <li class="nav-header">Инструменты</li>
-                <li><a href="#">Отечественные</a></li>
-                <li><a href="#">Иномарки</a></li>
-            </ul>
-        </div>
         <div class="col-md-9">
-            @foreach($products->chunk(4) as $productChunk)
-                <div class="row">
-                    @foreach($productChunk as $product)
-                        <div class="col-sm-6 col-md-3 product__element">
-                            <div class="thumbnail">
-                                <img src="{{ $product->imagePath }}" alt="{{ $product->title }}" class="img-responsive">
-                                <div class="caption">
-                                    <h3>{{ $product->title }}</h3>
-                                    <p class="description">{{ $product->description }}</p>
-                                    <div class="clearfix">
-                                        <pre class="price">{{ $product->price }} ₽</pre>
-                                        <a href="{{ route('product.add', ['id' => $product->id]) }}"
-                                           class="btn btn-primary addtocart" role="button">В корзину</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+            @if (isset($product))
+                {{ Form::model($product, array('route' => array('item.redact', $product->id), 'method' => 'put')) }}
+                <a href="/admin/item"></a>
+            @else
+                {{ Form::open(array('action' => array('ItemController@postItem'), 'method' => 'post')) }}
+            @endif
+            <!-- name -->
+                <div class="form-group">
+                {{ Form::label('title', 'Имя') }}
+                {{ Form::text('title') }}
                 </div>
-            @endforeach
+                <div class="form-group">
+                {{ Form::label('imagePath', 'Картинка') }}
+                {{ Form::text('imagePath') }}
+                </div>
+                <div class="form-group">
+                {{ Form::label('category', 'Категория') }}
+                {{ Form::text('category') }}
+                </div>
+                <div class="form-group">
+                {{ Form::label('price', 'Цена') }}
+                {{ Form::text('price') }}
+                </div>
+                <div class="form-group">
+                {{ Form::label('description', 'Описание') }}
+                {{ Form::textarea('description') }}
+                </div>
+                {{ Form::submit('Done') }}
+            {{ Form::close() }}
+            @if (isset($product))
+                {{ Form::open(['method' => 'delete', 'route' => ['item.delete', $product->id]]) }}
+                {{ Form::hidden('id', $product->id) }}
+                {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                {{ Form::close() }}
+            @endif
+
         </div>
     </div>
 

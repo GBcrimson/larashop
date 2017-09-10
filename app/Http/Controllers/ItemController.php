@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Product;
-use App\Order;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,52 +12,57 @@ use Auth;
 
 class ItemController extends Controller
 {
-    public function getItem(Request $request, $id)
+    public function getItem($id)
     {
-        $product = Product::find($id);
-        return view('shop.index', ['products' => $products]);
+        $product = Product::findOrFail($id);
+        return view('items.index', ['product' => $product]);
     }
 
-    public function postItem(Request $request, $id)
+    public function getNewItem()
     {
-        $product = Product::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
+        return view('items.index');
+    }
 
-        $request->session()->put('cart', $cart);
+    public function postItem(Request $request)
+    {
+        $item = Product::create([
+            'imagePath' => $request->input('imagePath'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'category' => $request->input('category'),
+            'price' => $request->input('price')
+        ]);
+
         if(!$request->ajax())
             return redirect()->route('product.index');
+        else
+            return response()->json($item);
     }
 
     public function putItem(Request $request, $id) {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->redact($id, $request->all()["num"]);
+        $item = Product::findOrFail($id);
 
-        if (count($cart->items) > 0) {
-            Session::put('cart', $cart);
-        } else {
-            Session::forget('cart');
-        }
+        $item->imagePath = $request->input('imagePath');
+        $item->title = $request->input('title');
+        $item->description = $request->input('description');
+        $item->category = $request->input('category');
+        $item->price = $request->input('price');
+
+        $item->save();
 
         if(!$request->ajax())
-            return redirect()->route('product.shoppingCart');
+            return redirect()->route('product.index');
         else
-            return response()->json($cart);
+            return response()->json($item);
     }
 
     public function deleteItem(Request $request, $id) {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->removeItem($id);
+        $item = Product::findOrFail($id);
+        $item->delete();
 
-        if (count($cart->items) > 0) {
-            Session::put('cart', $cart);
-        } else {
-            Session::forget('cart');
-        }
-
-        return response()->json($cart);
+        if(!$request->ajax())
+            return redirect()->route('product.index');
+        else
+            return response()->json($item);
     }
 }
