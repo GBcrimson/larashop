@@ -6,7 +6,7 @@ use App\Cart;
 use App\Product;
 use App\Order;
 use Illuminate\Http\Request;
-
+use Mail;
 use App\Http\Requests;
 use Session;
 use Auth;
@@ -19,9 +19,16 @@ class ProductController extends Controller
         return view('shop.index', ['products' => $products]);
     }
 
-    public function getColors()
+    public function getCatalog(Request $request, $category, $subcategory = false)
     {
-        $products = Product::where('category','colors') -> get();
+        if($category){
+            if($subcategory){
+                $products = Product::where([['category', '=', $category],['subcategory', '=', $subcategory]]) -> get();
+
+            } else {
+                $products = Product::where('category',$category) -> get();
+            }
+        }
         return view('shop.index', ['products' => $products]);
     }
 
@@ -121,10 +128,16 @@ class ProductController extends Controller
         $order->cart = serialize($cart);
         $order->address = $request->input('address');
         $order->name = $request->input('name');
+        $order->phone = $request->input('phone');
         $order->amount = $cart->totalPrice;
 
         Auth::user()->orders()->save($order);
 
+        Mail::send('mail.order', ['order' => $order,'cart' => $cart], function($message) {
+
+            $message->to("autoshop716@gmail.com")
+                ->subject('Order to u');
+        });
         Session::forget('cart');
         return redirect()->route('product.index')->with('success', 'Successfully purchased products!');
     }

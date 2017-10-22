@@ -38,7 +38,7 @@ class UserController extends Controller
 
         Mail::send('mail.verify', $confirmation_code, function($message) use ($request) {
 
-            $message->to($request->input('email'), "verification")
+            $message->to($request->input('email'))
                 ->subject('Verify your email address');
         });
 

@@ -26,9 +26,9 @@ Route::get('/item/{id}', [
     'as' => 'product.view'
 ]);
 
-Route::get('/colors', [
-    'uses' => 'ProductController@getColors',
-    'as' => 'product.colors'
+Route::get('/catalog/{category}/{subcategory?}', [
+    'uses' => 'ProductController@getCatalog',
+    'as' => 'product.catalog'
 ]);
 
 Route::get('/shopping-cart', [

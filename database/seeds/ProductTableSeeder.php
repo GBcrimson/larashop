@@ -13,36 +13,40 @@ class ProductTableSeeder extends Seeder
     {
         $product = new \App\Product([
             'imagePath' => 'http://ecx.images-amazon.com/images/I/51ZU%2BCvkTyL.jpg',
-            'title' => 'Harry Potter',
+            'title' => 'Кисточка для краски',
             'description' => 'Super cool - at least as a child.',
             'category' => 'colors',
+            'subcategory' => 'brushes',
             'price' => 10
         ]);
         $product->save();
 
         $product = new \App\Product([
             'imagePath' => 'http://www.revelationz.net/images/book/gameofthrones3.jpg',
-            'title' => 'A Song of Ice and Fire - A Storm of Swords',
+            'title' => 'Шлифовальный аппарат',
             'description' => 'No one is going to survive!',
             'category' => 'colors',
+            'subcategory' => 'instruments',
             'price' => 10
         ]);
         $product->save();
 
         $product = new \App\Product([
             'imagePath' => 'http://d.gr-assets.com/books/1411114164l/33.jpg',
-            'title' => 'Lord of the Rings',
+            'title' => 'Пистолет для покраски',
             'description' => 'I found the movies to be better ...',
             'category' => 'colors',
+            'subcategory' => 'instruments',
             'price' => 20
         ]);
         $product->save();
 
         $product = new \App\Product([
             'imagePath' => 'http://ecx.images-amazon.com/images/I/919-FLL37TL.jpg',
-            'title' => 'A Song of Ice and Fire - Game of Thrones',
+            'title' => 'красная краска',
             'description' => 'No one is going to survive!',
             'category' => 'colors',
+            'subcategory' => 'colors',
             'price' => 20
         ]);
         $product->save();
@@ -52,6 +56,7 @@ class ProductTableSeeder extends Seeder
             'title' => 'A Song of Ice and Fire - A Feast for Crows',
             'description' => 'Still, no one is going to survive!',
             'category' => 'instruments',
+            'subcategory' => 'electro',
             'price' => 20
         ]);
         $product->save();

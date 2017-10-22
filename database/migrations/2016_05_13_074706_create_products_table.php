@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('imagePath');
             $table->string('title');
             $table->string('category');
+            $table->string('subcategory');
             $table->text('description');
             $table->integer('price');
         });
