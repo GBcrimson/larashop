@@ -28,7 +28,10 @@ class ProductController extends Controller
             } else {
                 $products = Product::where('category',$category) -> get();
             }
+        } else {
+            $products = Product::all();
         }
+
         return view('shop.index', ['products' => $products]);
     }
 

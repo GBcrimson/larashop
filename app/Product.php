@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['imagePath', 'title', 'description', 'price', 'category', 'subcategory'];
+    protected $fillable = ['title', 'description', 'price', 'category', 'subcategory'];
+    public function photos() {
+        return $this->hasMany('App\ProductsPhoto');
+    }
 }

@@ -16,6 +16,11 @@ Route::get('/items', [
     'as' => 'product.index'
 ]);
 
+Route::get('/upload', 'UploadController@uploadForm');
+Route::post('/upload', 'UploadController@uploadSubmit');
+
+
+
 Route::get('/', [
     'uses' => 'ProductController@getIndex',
     'as' => 'product.index'
