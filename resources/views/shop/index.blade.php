@@ -27,29 +27,32 @@
             </ul>
         </div>
         <div class="col-md-9">
-            @foreach($products->chunk(4) as $productChunk)
-                <div class="row">
-                    @foreach($productChunk as $product)
-                        <div class="col-sm-6 col-md-3 product__element">
-                            <div class="thumbnail">
-                                {{--@foreach($product->photos as $image)--}}
-                                    {{--<img src="{{ $image->filename }}" alt="{{ $product->title }}" class="img-responsive">--}}
-                                {{--@endforeach--}}
+            <div class="product__container">
+                @foreach($products as $product)
+                    <div class="product__element">
+                        <div class="thumbnail">
+                            {{--@foreach($product->photos as $image)--}}
+                            {{--<img src="{{ $image->filename }}" alt="{{ $product->title }}" class="img-responsive">--}}
+                            {{--@endforeach--}}
+                            <div class="product__image">
                                 <img src="{{ $product->photos->first() ? $product->photos->first()->filename : 'https://camo.githubusercontent.com/341831200626efe3e0cf83317801fcac2200fbe2/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323639323831302f323130343036312f34643839316563302d386637362d313165332d393230322d6637333934306431306632302e706e67'}}" alt="{{ $product->title }}" class="img-responsive">
-                                <div class="caption">
+
+                            </div>
+                            <div class="product__caption">
+                                <div class="product__description">
                                     <h3>{{ $product->title }}</h3>
-                                    <p class="description">{{ $product->description }}</p>
-                                    <div class="clearfix">
-                                        <pre class="price">{{ $product->price }} ₽</pre>
-                                        <a href="{{ route('product.add', ['id' => $product->id]) }}"
-                                           class="btn btn-primary addtocart" role="button">В корзину</a>
-                                    </div>
+                                </div>
+                                {{--<p class="description">{{ $product->description }}</p>--}}
+                                <div class="clearfix">
+                                    <pre class="price">{{ $product->price }} ₽</pre>
+                                    <a href="{{ route('product.add', ['id' => $product->id]) }}"
+                                       class="btn btn-primary addtocart" role="button">В корзину</a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            @endforeach
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 

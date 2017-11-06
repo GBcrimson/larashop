@@ -1,12 +1,8 @@
-.thumbnail img {
-    max-height: 150px;
-}
-
 .thumbnail .description {
     color: #7f7f7f;
 }
 
-.caption .price {
+.product__caption .price {
     vertical-align: top;
     font-weight:bold;
     font-size: 16px;
@@ -14,12 +10,13 @@
     display: inline-block;
 }
 
-.caption a{
+.product__caption a{
     vertical-align: top;
 }
 
 .shopping-cart table{
     padding:0 20px;
+    width: 100%;
     border-bottom: 1px solid #ccc;
 }
 
@@ -41,11 +38,30 @@
     text-align: left;
 }
 
-.caption h3{
-    font-size: 13px;
+.product__caption h3{
+    font-size: 16px;
     font-weight: bold;
 }
 
 .product__element{
+    text-align: center;
     padding: 0 5px;
+    height: 300px;
+    width:200px;
+    float: left;
+    margin-bottom: 10px;
+}
+.product__image{
+    display: flex;
+    height: 180px;
+    overflow: hidden;
+}
+
+.product__image img{
+    margin: auto;
+}
+
+.product__description{
+    height: 64px;
+    overflow: hidden;
 }
