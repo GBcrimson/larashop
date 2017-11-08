@@ -1,0 +1,51 @@
+#wrapper{
+    //padding: 0 10px;
+    //@media (min-width: $screen-w--s) {
+    //    padding: 0 20px;
+    //}
+    //@media (min-width: $screen-w--xl) {
+    //    padding: 0 30px;
+    //}
+}
+
+.body-container{
+    max-width: 1366px;
+    margin: 0 auto;
+}
+
+.container-inner{
+    overflow: hidden;
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 0 7px;
+    @media (min-width: $screen-w--s) {
+        padding: 0 23px;
+    }
+    @media (min-width: $screen-w--xl) {
+        padding: 0 30px;
+    }
+}
+
+.main {
+    min-width: 100%;
+    flex: 1 0 auto;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1366px;
+    margin: 0 auto;
+    padding:0;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-both{
+    clear: both;
+}
